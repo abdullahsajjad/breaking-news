@@ -11,6 +11,16 @@
  * @package    Breaking_News
  * @subpackage Breaking_News/admin/partials
  */
-?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+settings_errors(); ?>
+<div class="wrap">
+    <h1 class="wp-heading-inline">Breaking News</h1>
+    <form method="post" action="options.php">
+        <div class="bn-settings-content">
+			<?php
+			do_action( 'bn_settings_content' );
+			?>
+        </div>
+		<?php submit_button(); ?>
+    </form>
+</div>

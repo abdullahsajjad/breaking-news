@@ -84,20 +84,32 @@ class Breaking_News_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Breaking_News_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Breaking_News_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/js/breaking-news-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
+	/**
+	 * Adds the Settings Page in Admin Dashboard
+	 *
+	 * @since 0.0.1
+	 */
+	public function add_admin_page() {
+		add_menu_page( __( 'Breaking News', 'breaking-news' ),
+			'Breaking News',
+			'manage_options',
+			'breaking-news',
+			[ $this, 'settings_page_callback' ],
+			'dashicons-welcome-widgets-menus',
+			90
+		);
+	}
+
+	/**
+	 * Settings Page Callback method
+	 *
+	 * @since 0.0.1
+	 */
+	public function settings_page_callback() {
+		require_once plugin_dir_path( __FILE__ ) . 'templates/breaking-news-admin-display.php';
+	}
 }

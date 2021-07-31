@@ -76,7 +76,7 @@ class Breaking_News {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_admin_hooks();
+		$this->define_admin();
 		$this->define_public_hooks();
 
 	}
@@ -122,6 +122,11 @@ class Breaking_News {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-breaking-news-public.php';
 
+		/**
+		 * The class responsible for defining all actions that occur in the settings page.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/includes/class-breaking-news-settings.php';
+
 		$this->loader = new Breaking_News_Loader();
 
 	}
@@ -144,19 +149,48 @@ class Breaking_News {
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
+	 * Define and register all the functionality related to admin area
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since    0.0.1
+	 * @access   protected
 	 */
-	private function define_admin_hooks() {
+	protected function define_admin() {
+		$this->define_admin_hooks();
+
+		$this->define_settings_hooks();
+	}
+
+	/**
+	 * Register all the hooks related to the admin area functionality
+	 * of the plugin.
+	 *
+	 * @since    0.0.1
+	 * @access   protected
+	 */
+	protected function define_admin_hooks() {
 
 		$plugin_admin = new Breaking_News_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_page' );
+
+	}
+
+
+	/**
+	 * Register all the hooks related to the settings page
+	 * of the plugin.
+	 *
+	 * @since    0.0.1
+	 * @access   protected
+	 */
+	protected function define_settings_hooks () {
+		$plugin_settings = new Breaking_News_Settings;
+
+		$this->loader->add_action( 'admin_init', $plugin_settings, 'bn_register_settings' );
+		$this->loader->add_action( 'bn_settings_content', $plugin_settings, 'do_settings_fields' );
 
 	}
 

@@ -163,7 +163,10 @@ class Breaking_News_Settings {
 	}
 
 	/**
-	 * To be defined
+	 * Settings Field - Selected breaking News Post Callback method
+	 * option => bn_settings[post_id]
+	 *
+	 * @since 0.0.1
 	 */
 	public function bn_selected_post_callback() {
 	    if( isset( $this->bn_settings['post_id'] ) ) {

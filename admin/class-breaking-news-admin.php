@@ -112,4 +112,82 @@ class Breaking_News_Admin {
 	public function settings_page_callback() {
 		require_once plugin_dir_path( __FILE__ ) . 'templates/breaking-news-admin-display.php';
 	}
+
+	/**
+	 * Adds Custom Meta boxes of the plugin
+     *
+     * @since 0.0.1
+	 */
+	public function add_custom_meta_box() {
+		add_meta_box( 'bn_fields', __( 'Breaking News' ),
+			[ $this, 'bn_meta_box_callback' ],
+			$this->get_supported_post_types(),
+			'advanced',
+			'high'
+		);
+	}
+
+	/**
+	 * Custom metabox Callback, displays all custom meta fields
+     *
+     * Meta Fields
+     * - Enable Breaking News (checkbox) => is_breaking_news
+     * - Custom title (text)             => bn_custom_title
+     * - Set Expiry Date (checkbox)      => bn_expiry
+     * - Expiry Date (Date)              => bn_expiry_date
+     * - Expiry Time (Time)              => bn_expiry_time
+     *
+     * @since 0.0.1
+	 */
+	public function bn_meta_box_callback () {
+		?>
+		<div class="bn-meta-main">
+            <div class="bn-meta-control">
+                <label class="bn-label" for="is-breaking-news">Make this Post Breking News</label>
+                <label class="bn-checkbox">
+                    <input name="is_breaking_news" id="is-breaking-news" type="checkbox" />
+                    <span class="slider round"></span>
+                </label>
+                <small class="bn-small-description">Enable to make this post a breaking news</small>
+            </div>
+            <div class="bn-meta-control">
+                <label class="bn-label" for="bn-custom-title">Custom Title</label>
+                <input class="bn-meta-field" name="bn_custom_title" id="bn-custom-title" type="text" />
+                <small class="bn-small-description">Add a custom title to display instead of post title</small>
+            </div>
+            <div class="bn-meta-control">
+                <label class="bn-label" for="bn-expiry">Set Expiry Date</label>
+                <label class="bn-checkbox">
+                    <input name="bn_expiry" id="bn-expiry" type="checkbox" />
+                    <span class="slider round"></span>
+                </label>
+                <small class="bn-small-description">Enable to add an expiry date</small>
+            </div>
+            <div class="bn-meta-control">
+                <label class="bn-label" for="bn-expiry-date">Expiry Date & Time</label>
+                <input class="bn-meta-field" name="bn_expiry_date" id="bn-expiry-date" type="date" />
+                <input class="bn-meta-field" name="bn_expiry_time" id="bn-expiry-time" type="time" />
+                <small class="bn-small-description">Set Expiry Date & Time</small>
+            </div>
+		</div> <!-- bn-meta-main -->
+		<?php
+	}
+
+	/**
+	 * Return names of all registered post types
+	 *
+	 * @access protected
+	 * @return mixed|void
+	 * @since 0.0.1
+	 */
+	protected function get_supported_post_types() {
+		$args = [
+			'public' => true,
+		];
+
+		$output   = 'names'; // 'names' or 'objects' (default: 'names')
+		$operator = 'and'; // 'and' or 'or' (default: 'and')
+
+		return apply_filters( 'bn_supported_post_types', get_post_types( $args, $output, $operator ) );
+	}
 }

@@ -2,3 +2,78 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+.bn-meta-control {
+    margin: 15px 0;
+}
+
+.bn-label {
+    min-width: 250px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.bn-small-description {
+    display: block;
+    max-width: 220px;
+}
+
+body .bn-meta-field {
+    min-width: 280px;
+    border-radius: 0px !important;
+}
+
+.bn-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.bn-checkbox input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.bn-checkbox .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.bn-checkbox .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.bn-checkbox input:checked + .slider {
+    background-color: #2196F3;
+}
+
+.bn-checkbox input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.bn-checkbox input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(16px);
+}
+
+label.bn-checkbox {
+    min-width: auto;
+}

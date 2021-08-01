@@ -209,6 +209,7 @@ class Breaking_News {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_head', $plugin_public, 'display_breaking_news',9999 );
 
 	}
 

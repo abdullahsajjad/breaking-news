@@ -110,7 +110,10 @@ class Breaking_News_Public {
                 el.style.textAlign       = "center";
                 el.style.position        = "relative"; // added after testing on twenty seventeen
 
-                let header = document.querySelector("header");
+                let header = document.querySelector(".site-header");
+                if( header === undefined || header === null ) {
+                    header = document.querySelector("#site-header");
+                }
                 insertAfter(header, el);
 
             })

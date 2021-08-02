@@ -17,6 +17,8 @@
  * Plugin URI:        https://git.toptal.com/screening/Abdullah-Sajjad
  * Description:       Display's breaking news on website.
  * Version:           0.1.0
+ * Requires at least: 5
+ * Requires PHP:      7.1
  * Author:            Abdullah Sajjad
  * Author URI:        https://github.com/abdullahsajjad
  * License:           GPL-2.0+

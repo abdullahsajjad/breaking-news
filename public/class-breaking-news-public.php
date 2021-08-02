@@ -79,21 +79,35 @@ class Breaking_News_Public {
 	public function display_breaking_news() {
 		$bn_settings = get_option( 'bn_settings' );
 
-		if( !isset( $bn_settings['post_id'] ) ) {
+		if ( ! isset( $bn_settings['post_id'] ) ) {
 			return;
 		}
 
-		$title = get_post_meta( $bn_settings['post_id'], 'bn-custom-title', TRUE );
-		if( $title === '' || $title === FALSE ) {
+		$title = get_post_meta( $bn_settings['post_id'], 'bn-custom-title', true );
+		if ( $title === '' || $title === false ) {
 			$title = get_the_title( $bn_settings['post_id'] );
 		}
 
 		$bg_color  = $bn_settings['background_color'];
 		$txt_color = $bn_settings['text_color'];
+		$html      = "<div class='breaking news' style='padding: 10px; text-transform: capitalize;text-align: center; background-color:$bg_color; color:$txt_color;'>{$bn_settings['news_title']}&nbsp;<a style='color:$txt_color;' href=" . get_the_permalink( $bn_settings['post_id'] ) . ">$title</a></div>";
+
 		?>
-		<div class="breaking news" style='<?php echo "text-align: center; background-color:$bg_color; color:$txt_color;";?>'>
-			<?php echo $bn_settings['news_title'] ?? '';?>: <a href="<?php echo get_the_permalink( $bn_settings['post_id'] )?>"><?php echo $title;?></a>
-		</div>
+        <script>
+            jQuery( document ).ready( function (){
+                let display = false;
+                if( jQuery( '.site-header' ).length ) {
+                    jQuery('.site-header').after("<?php echo $html ?>");
+                    display = true;
+                }
+                if( display === false ) {
+                    if( jQuery( '#site-header' ).length ) {
+                        jQuery('#site-header').after("<?php echo $html ?>");
+                    }
+                }
+            } );
+
+        </script>
 		<?php
 	}
 

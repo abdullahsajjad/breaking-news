@@ -1,4 +1,4 @@
-#Breaking News
+# Breaking News
 
 ### WordPress plugin to display breaking news after site title
 

@@ -65,6 +65,7 @@ class Breaking_News_Settings {
 	 * - bn_post_id
 	 *
 	 * @since 0.0.1
+     *        0.0.3 added settings field to remove plugin data
 	 */
 	public function bn_register_settings() {
 		register_setting( 'bn_settings', 'bn_settings', [
@@ -109,6 +110,14 @@ class Breaking_News_Settings {
 			'bn_settings',
 			'bn_settings_section'
 		);  // breaking news selected post
+
+		add_settings_field(
+			'bn_remove_data',
+			__( 'Remove Plugin Data', 'breaking-news' ),
+			[ $this, 'bn_remove_data_callback' ],
+			'bn_settings',
+			'bn_settings_section'
+		);  // remove plugin data checkbox
 
 	}   // end function - bn_register_settings
 
@@ -185,6 +194,22 @@ class Breaking_News_Settings {
 		    <?php
         }
 	}
+
+	/**
+	 * Settings Field - Remove Plugin Data  Callback method
+	 * option => bn_settings[remove_data]
+	 *
+	 * @since 0.0.3
+	 */
+	public function bn_remove_data_callback() {
+	    ?>
+        <label class="bn-checkbox">
+            <input name="bn_settings[remove_data]" id="remove-data" type="checkbox" <?php checked( isset( $this->bn_settings['remove_data'] ) ); ?> />
+            <span class="slider round"></span>
+        </label>
+        <small class="bn-field-description">Enable to delete plugin data on Uninstall.</small>
+		<?php
+    }
 
 
 	/**

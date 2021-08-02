@@ -18,6 +18,13 @@ settings_errors(); ?>
     <form method="post" action="options.php">
         <div class="bn-settings-content">
 			<?php
+            /**
+             * Populates All Setting Sections and Fields
+             *
+             * @action  - Breaking_News_Settings->do_settings_fields
+             *
+             * @since 0.0.1
+            */
 			do_action( 'bn_settings_content' );
 			?>
         </div>

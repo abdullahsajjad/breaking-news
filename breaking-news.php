@@ -16,7 +16,7 @@
  * Plugin Name:       Breaking News
  * Plugin URI:        https://git.toptal.com/screening/Abdullah-Sajjad
  * Description:       Display's breaking news on website.
- * Version:           0.0.2
+ * Version:           0.0.3
  * Author:            Abdullah Sajjad
  * Author URI:        https://github.com/abdullahsajjad
  * License:           GPL-2.0+
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || die();
 /**
  * Currently plugin version.
  */
-define( 'BREAKING_NEWS_VERSION', '0.0.2' );
+define( 'BREAKING_NEWS_VERSION', '0.0.3' );
 
 /**
  * The code that runs during plugin activation.

@@ -61,18 +61,6 @@ class Breaking_News_Public {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Breaking_News_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Breaking_News_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/css/breaking-news-public.css', array(), $this->version, 'all' );
 
 	}
@@ -84,20 +72,43 @@ class Breaking_News_Public {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Breaking_News_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Breaking_News_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/js/breaking-news-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	public function display_breaking_news() {
+		$bn_settings = get_option( 'bn_settings' );
+
+		if ( ! isset( $bn_settings['post_id'] ) ) {
+			return;
+		}
+
+		$title = get_post_meta( $bn_settings['post_id'], 'bn-custom-title', true );
+		if ( $title === '' || $title === false ) {
+			$title = get_the_title( $bn_settings['post_id'] );
+		}
+
+		$bg_color  = $bn_settings['background_color'];
+		$txt_color = $bn_settings['text_color'];
+		$html      = "<div class='breaking news' style='padding: 10px; text-transform: capitalize;text-align: center; background-color:$bg_color; color:$txt_color;'>{$bn_settings['news_title']}&nbsp;<a style='color:$txt_color;' href=" . get_the_permalink( $bn_settings['post_id'] ) . ">$title</a></div>";
+
+		?>
+        <script>
+            jQuery( document ).ready( function (){
+                let display = false;
+                if( jQuery( '.site-header' ).length ) {
+                    jQuery('.site-header').after("<?php echo $html ?>");
+                    display = true;
+                }
+                if( display === false ) {
+                    if( jQuery( '#site-header' ).length ) {
+                        jQuery('#site-header').after("<?php echo $html ?>");
+                    }
+                }
+            } );
+
+        </script>
+		<?php
 	}
 
 }

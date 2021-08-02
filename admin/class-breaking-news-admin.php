@@ -233,6 +233,10 @@ class Breaking_News_Admin {
 		$is_breaking_news = filter_input( INPUT_POST, 'is_breaking_news', FILTER_SANITIZE_STRING );
 
 		if ( $is_breaking_news !== 'on' ) {
+			//get breaking news post from options
+			$bn_settings = get_option( 'bn_settings' );
+			unset($bn_settings['post_id']);
+			update_option( 'bn_settings', $bn_settings );
 			return;
 		} // endif
 

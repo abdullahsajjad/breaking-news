@@ -163,9 +163,27 @@ class Breaking_News_Settings {
 	}
 
 	/**
-	 * To be defined
+	 * Settings Field - Selected breaking News Post Callback method
+	 * option => bn_settings[post_id]
+	 *
+	 * @since 0.0.1
 	 */
 	public function bn_selected_post_callback() {
+	    if( isset( $this->bn_settings['post_id'] ) ) {
+            ?>
+            <input class="bn-settings-field" name="bn_settings[post_id]" id="bn_post_id" type="hidden"
+                   value="<?php echo $this->bn_settings['post_id'] ?? ''; ?>"/>
+            <p><?php echo get_the_title( $this->bn_settings['post_id'] );?></p>
+            <a class="bn-field-description" href="<?php echo get_the_permalink( $this->bn_settings['post_id'] );?>">Edit</a>
+            <?php
+	    } else {
+	        ?>
+            <p>No Post selected
+                <a class="bn-field-description" href="<?php echo admin_url('edit.php');?>">click here</a>
+                to select a post
+            </p>
+		    <?php
+        }
 	}
 
 

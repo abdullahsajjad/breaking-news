@@ -108,6 +108,7 @@ class Breaking_News_Public {
                 el.style.padding         = "10px";
                 el.style.textTransform   = "Capitalize";
                 el.style.textAlign       = "center";
+                el.style.position        = "relative"; // added after testing on twenty seventeen
 
                 let header = document.querySelector("header");
                 insertAfter(header, el);

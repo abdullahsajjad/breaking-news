@@ -23,14 +23,56 @@
 class Breaking_News_Activator {
 
 	/**
-	 * Short Description. (use period)
+	 * Runs When Plugin is activated
 	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
+	 * @since    0.0.2
 	 */
 	public static function activate() {
+		self::set_default_options();
+	}
 
+	/**
+	 * Sets Default options for the plugin
+	 *
+	 * @since 0.0.2
+	 */
+	protected static function set_default_options() {
+		$bn_settings = get_option( 'bn_settings' );
+
+		$bn_defaults = [
+			'news_title'       => 'Breaking News :',
+			'background_color' => '#fb0404',
+			'text_color'       => '#ffffff',
+		];
+
+		self::bn_save_default_options( $bn_settings, $bn_defaults, 'bn_settings' );
+	}
+
+
+	/**
+	 * Save default options in options
+	 *
+	 * checks for the existing options if not set then
+	 * add the default value's in options table
+	 *
+	 * @param $bn_settings      array   db options array
+	 * @param $default_settings array   default options array
+	 * @param $option           string  option name
+	 *
+	 * @since 0.0.2
+	 */
+	protected static function bn_save_default_options( $bn_settings, $default_settings, $option ) {
+		if( $bn_settings === FALSE ) {
+			$bn_settings = $default_settings;
+		} else {
+			foreach ( $default_settings as $key => $value ) {
+				if ( !isset( $bn_settings[ $key ] ) ) {
+					$bn_settings[ $key ] = $value;
+				}
+			}
+		}
+
+		update_option( $option, $bn_settings );
 	}
 
 }

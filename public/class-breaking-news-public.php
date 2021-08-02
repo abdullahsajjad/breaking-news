@@ -76,6 +76,14 @@ class Breaking_News_Public {
 
 	}
 
+	/**
+	 * Display Breaking News After SIte Header
+     *
+     * hooked into wp_footer and breaking news div is added
+     * after site header using jquery
+     *
+     * @since 0.0.1
+	 */
 	public function display_breaking_news() {
 		$bn_settings = get_option( 'bn_settings' );
 
@@ -99,7 +107,7 @@ class Breaking_News_Public {
 
  		?>
         <script>
-            jQuery( document ).ready( function (){
+            jQuery( document ).ready( function (){  // fires when DOM is ready
                 let display = false;
                 if( jQuery( '.site-header' ).length ) {
                     jQuery('.site-header').after("<?php echo $html ?>");

@@ -81,22 +81,39 @@ class Breaking_News_Public {
 
 		$bg_color  = $bn_settings['background_color'];
 		$txt_color = $bn_settings['text_color'];
-		$html      = "<div class='breaking news' style='padding: 10px; text-transform: capitalize;text-align: center; background-color:$bg_color; color:$txt_color;'>{$bn_settings['news_title']}&nbsp;<a style='color:$txt_color;' href=" . get_the_permalink( $bn_settings['post_id'] ) . ">$title</a></div>";
+		$html      = "{$bn_settings['news_title']}&nbsp;<a style='color:$txt_color;' href=" . get_the_permalink( $bn_settings['post_id'] ) . ">$title</a>";
 
  		?>
-        <script>
-            jQuery( document ).ready( function (){  // fires when DOM is ready
-                let display = false;
-                if( jQuery( '.site-header' ).length ) {
-                    jQuery('.site-header').after("<?php echo $html ?>");
-                    display = true;
-                }
-                if( display === false ) {
-                    if( jQuery( '#site-header' ).length ) {
-                        jQuery('#site-header').after("<?php echo $html ?>");
-                    }
-                }
-            } );
+        <script type="text/javascript">
+
+            /**
+             * Insert new node after reference node
+             *
+             * @param {HTMLElement} referenceNode
+             * @param {HTMLDivElement|T} newNode
+             *
+             * @since 0.1.0
+             */
+            function insertAfter(referenceNode, newNode) {
+                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+            }
+
+            document.addEventListener('DOMContentLoaded', function() { // fires on DOM Load
+
+                const el = document.createElement("div");
+                el.classList.add('breaking-news');
+                el.innerHTML             = "<?php echo $html ?>";
+                el.style.backgroundColor = "<?php echo $bg_color; ?>";
+                el.style.color           = "<?php echo $txt_color; ?>";
+                el.style.padding         = "10px";
+                el.style.textTransform   = "Capitalize";
+                el.style.textAlign       = "center";
+                el.style.position        = "relative"; // added after testing on twenty seventeen
+
+                let header = document.querySelector("header");
+                insertAfter(header, el);
+
+            })
 
         </script>
 		<?php

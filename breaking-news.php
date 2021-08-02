@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://github.com/abdullahsajjad
- * @since             1.0.0
+ * @since             0.0.2
  * @package           Breaking_News
  *
  * @wordpress-plugin
  * Plugin Name:       Breaking News
  * Plugin URI:        https://git.toptal.com/screening/Abdullah-Sajjad
  * Description:       Display's breaking news on website.
- * Version:           0.0.1
+ * Version:           0.0.2
  * Author:            Abdullah Sajjad
  * Author URI:        https://github.com/abdullahsajjad
  * License:           GPL-2.0+
@@ -30,10 +30,8 @@ defined( 'ABSPATH' ) || die();
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
  */
-define( 'BREAKING_NEWS_VERSION', '0.0.1' );
+define( 'BREAKING_NEWS_VERSION', '0.0.2' );
 
 /**
  * The code that runs during plugin activation.

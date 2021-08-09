@@ -204,7 +204,10 @@ class Breaking_News_Settings {
 	}
 
 	/**
+	 * Settings Field - Selected breaking News Position Callback method
+	 * option => bn_settings[bn_position]
 	 *
+	 * @since 0.2.0
 	 */
 	public function bn_selected_position_callback() {
 		$value = $this->bn_settings['bn_position'] ?? '';

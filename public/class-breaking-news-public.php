@@ -79,9 +79,10 @@ class Breaking_News_Public {
 			$title = get_the_title( $bn_settings['post_id'] );
 		}
 
-		$bg_color  = $bn_settings['background_color'];
-		$txt_color = $bn_settings['text_color'];
-		$html      = "{$bn_settings['news_title']}&nbsp;<a style='color:$txt_color;' href=" . get_the_permalink( $bn_settings['post_id'] ) . ">$title</a>";
+		$bg_color    = $bn_settings['background_color'] ?? '#ff0000';
+		$txt_color   = $bn_settings['text_color'] ?? '#ffffff';
+		$bn_position = $bn_settings['bn_position'] ?? 'after-header';
+		$html        = "{$bn_settings['news_title']}&nbsp;<a style='color:$txt_color;' href=" . get_the_permalink( $bn_settings['post_id'] ) . ">$title</a>";
 
  		?>
         <script type="text/javascript">
@@ -96,6 +97,18 @@ class Breaking_News_Public {
              */
             function insertAfter(referenceNode, newNode) {
                 referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+            }
+
+            /**
+             * Insert new node after reference node
+             *
+             * @param {HTMLElement} referenceNode
+             * @param {HTMLDivElement|T} newNode
+             *
+             * @since 0.1.0
+             */
+            function insertBefore(referenceNode, newNode) {
+                referenceNode.parentNode.insertBefore(newNode, referenceNode.previousSibling);
             }
 
             document.addEventListener('DOMContentLoaded', function() { // fires on DOM Load
@@ -114,7 +127,17 @@ class Breaking_News_Public {
                 if( header === undefined || header === null ) {
                     header = document.querySelector("#site-header");
                 }
-                insertAfter(header, el);
+                <?php
+                if( $bn_position === 'after-header' ) {
+                    ?>
+                    insertAfter(header, el);
+                    <?php
+                } elseif( $bn_position === 'before-header' ) {
+                    ?>
+                    insertBefore(header, el);
+                    <?php
+                }
+                ?>
 
             })
 

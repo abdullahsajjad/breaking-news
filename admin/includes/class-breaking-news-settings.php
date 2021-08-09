@@ -112,6 +112,14 @@ class Breaking_News_Settings {
 		);  // breaking news selected post
 
 		add_settings_field(
+			'bn_position',
+			__( 'Breaking News Position', 'breaking-news' ),
+			[ $this, 'bn_selected_position_callback' ],
+			'bn_settings',
+			'bn_settings_section'
+		);  // breaking news position
+
+		add_settings_field(
 			'bn_remove_data',
 			__( 'Remove Plugin Data', 'breaking-news' ),
 			[ $this, 'bn_remove_data_callback' ],
@@ -153,7 +161,7 @@ class Breaking_News_Settings {
 		?>
         <input class="bn-settings-field" name="bn_settings[background_color]" id="bn_background_color" type="color"
                value="<?php echo $this->bn_settings['background_color'] ?? ''; ?>"/>
-        <small class="bn-field-description">Select Background Color.</small>
+        <small class="bn-field-inline-description">Select Background Color.</small>
 		<?php
 	}
 
@@ -167,7 +175,7 @@ class Breaking_News_Settings {
 		?>
         <input class="bn-settings-field" name="bn_settings[text_color]" id="bn_text_color" type="color"
                value="<?php echo $this->bn_settings['text_color'] ?? ''; ?>"/>
-        <small class="bn-field-description">Select Text Color.</small>
+        <small class="bn-field-inline-description">Select Text Color.</small>
 		<?php
 	}
 
@@ -196,6 +204,23 @@ class Breaking_News_Settings {
 	}
 
 	/**
+	 * Settings Field - Selected breaking News Position Callback method
+	 * option => bn_settings[bn_position]
+	 *
+	 * @since 0.2.0
+	 */
+	public function bn_selected_position_callback() {
+		$value = $this->bn_settings['bn_position'] ?? '';
+	    ?>
+        <select name="bn_settings[bn_position]" class="bn-settings-field" id="bn-position-select">
+            <option value="after-header" <?php selected( $value, 'after-header' ) ?>>After Header</option>
+            <option value="before-header" <?php selected( $value, 'before-header' ) ?>>Before Header</option>
+        </select>
+        <small class="bn-field-description">Select Breaking Position.</small>
+		<?php
+    }
+
+	/**
 	 * Settings Field - Remove Plugin Data  Callback method
 	 * option => bn_settings[remove_data]
 	 *
@@ -207,7 +232,7 @@ class Breaking_News_Settings {
             <input name="bn_settings[remove_data]" id="remove-data" type="checkbox" <?php checked( isset( $this->bn_settings['remove_data'] ) ); ?> />
             <span class="slider round"></span>
         </label>
-        <small class="bn-field-description">Enable to delete plugin data on Uninstall.</small>
+        <small class="bn-field-inline-description">Enable to delete plugin data on Uninstall.</small>
 		<?php
     }
 

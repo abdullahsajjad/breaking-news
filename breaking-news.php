@@ -14,9 +14,9 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Breaking News
- * Plugin URI:        https://git.toptal.com/screening/Abdullah-Sajjad
+ * Plugin URI:        https://github.com/abdullahsajjad/breaking-news
  * Description:       Display's breaking news on website.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Requires at least: 5
  * Requires PHP:      7.1
  * Author:            Abdullah Sajjad
@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || die();
 /**
  * Currently plugin version.
  */
-define( 'BREAKING_NEWS_VERSION', '0.1.0' );
+define( 'BREAKING_NEWS_VERSION', '0.2.0' );
 
 /**
  * The code that runs during plugin activation.

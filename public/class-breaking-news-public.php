@@ -98,6 +98,18 @@ class Breaking_News_Public {
                 referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
             }
 
+            /**
+             * Insert new node after reference node
+             *
+             * @param {HTMLElement} referenceNode
+             * @param {HTMLDivElement|T} newNode
+             *
+             * @since 0.1.0
+             */
+            function insertBefore(referenceNode, newNode) {
+                referenceNode.parentNode.insertBefore(newNode, referenceNode.previousSibling);
+            }
+
             document.addEventListener('DOMContentLoaded', function() { // fires on DOM Load
 
                 const el = document.createElement("div");

@@ -77,3 +77,13 @@ body .bn-meta-field {
 label.bn-checkbox {
     min-width: auto;
 }
+
+#bn-position-select,
+#bn_news_title {
+    min-width: 320px;
+}
+
+.bn-field-description {
+    display: block;
+    padding: 4px 0 0 2px;
+}

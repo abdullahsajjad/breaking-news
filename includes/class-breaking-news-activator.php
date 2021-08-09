@@ -43,6 +43,7 @@ class Breaking_News_Activator {
 			'news_title'       => 'Breaking News :',
 			'background_color' => '#fb0404',
 			'text_color'       => '#ffffff',
+			'bn_position'      => 'after-header',
 		];
 
 		self::bn_save_default_options( $bn_settings, $bn_defaults, 'bn_settings' );

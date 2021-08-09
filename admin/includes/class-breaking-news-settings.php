@@ -112,6 +112,14 @@ class Breaking_News_Settings {
 		);  // breaking news selected post
 
 		add_settings_field(
+			'bn_position',
+			__( 'Breaking News Position', 'breaking-news' ),
+			[ $this, 'bn_selected_position_callback' ],
+			'bn_settings',
+			'bn_settings_section'
+		);  // breaking news position
+
+		add_settings_field(
 			'bn_remove_data',
 			__( 'Remove Plugin Data', 'breaking-news' ),
 			[ $this, 'bn_remove_data_callback' ],
@@ -194,6 +202,19 @@ class Breaking_News_Settings {
 		    <?php
         }
 	}
+
+	/**
+	 *
+	 */
+	public function bn_selected_position_callback() {
+		$value = $this->bn_settings['bn_position'] ?? '';
+	    ?>
+        <select name="bn_settings[bn_position]" class="bn-settings-field">
+            <option value="after-header" <?php selected( $value, 'after-header' ) ?>>After Header</option>
+            <option value="before-header" <?php selected( $value, 'before-header' ) ?>>Before Header</option>
+        </select>
+        <?php
+    }
 
 	/**
 	 * Settings Field - Remove Plugin Data  Callback method
